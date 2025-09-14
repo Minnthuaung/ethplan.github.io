@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH Investment Tracker - Excel Template</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .sheet-tab {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-right: 5px;
+            background: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            cursor: pointer;
+            border-radius: 4px 4px 0 0;
+            font-weight: bold;
+        }
+        
+        .sheet-tab.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .sheet-content {
+            display: none;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            min-height: 500px;
+        }
+        
+        .sheet-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .number {
+            text-align: right;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .summary-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .alert-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .formula {
+            background: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #2c3e50;">🚀 ETH Investment Tracker - Excel Template</h1>
+        
+        <!-- Sheet Tabs -->
+        <div class="tabs">
+            <div class="sheet-tab active" onclick="showSheet(0)">📊 Portfolio Summary</div>
+            <div class="sheet-tab" onclick="showSheet(1)">📝 Transaction History</div>
+            <div class="sheet-tab" onclick="showSheet(2)">💰 P&L Tracking</div>
+            <div class="sheet-tab" onclick="showSheet(3)">📅 DCA Schedule</div>
+            <div class="sheet-tab" onclick="showSheet(4)">🎯 Strategy Targets</div>
+            <div class="sheet-tab" onclick="showSheet(5)">📈 Performance Metrics</div>
+        </div>
+
+        <!-- Sheet 1: Portfolio Summary -->
+        <div class="sheet-content active">
+            <h2>📊 Portfolio Summary</h2>
+            
+            <div class="summary-box">
+                <h3>Current Position (as of Sept 7, 2025)</h3>
+                <table>
+                    <tr>
+                        <th style="width: 200px;">Metric</th>
+                        <th style="width: 120px;">Value</th>
+                        <th>Formula/Notes</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Total ETH Holdings</strong></td>
+                        <td class="number">0.26673017</td>
+                        <td>Sum of all purchases</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Investment</strong></td>
+                        <td class="number">20,045 THB</td>
+                        <td>Including 45 THB fees</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weighted Avg Cost</strong></td>
+                        <td class="number">75,179 THB</td>
+                        <td class="formula">=Total_Investment/Total_ETH</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Current ETH Price</strong></td>
+                        <td class="number">137,500 THB</td>
+                        <td>Manual update required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portfolio Value</strong></td>
+                        <td class="number positive">36,675 THB</td>
+                        <td class="formula">=Total_ETH*Current_Price</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Unrealized P&L</strong></td>
+                        <td class="number positive">+16,630 THB</td>
+                        <td class="formula">=Portfolio_Value-Total_Investment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Return %</strong></td>
+                        <td class="number positive">+82.9%</td>
+                        <td class="formula">=(Portfolio_Value/Total_Investment-1)*100</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="alert-box">
+                <h3>⚡ Quick Actions</h3>
+                <ul>
+                    <li>Update current ETH price daily</li>
+                    <li>Set price alerts at 150,000 & 180,000 THB</li>
+                    <li>Execute monthly DCA on 1st of each month</li>
+                    <li>Review profit taking strategy monthly</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sheet 2: Transaction History -->
+        <div class="sheet-content">
+            <h2>📝 Transaction History</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Date & Time</th>
+                        <th>Action</th>
+                        <th>ETH Amount</th>
+                        <th>THB Spent/Received</th>
+                        <th>Price per ETH</th>
+                        <th>Running ETH Total</th>
+                        <th>Running THB Total</th>
+                        <th>Notes</th>
+                        <th>Current Value</th>
+                        <th>P&L</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="center">1</td>
+                        <td>2025-01-22 21:07:31</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.02244599</td>
+                        <td class="number">2,500</td>
+                        <td class="number">111,100.00</td>
+                        <td class="number">0.02244599</td>
+                        <td class="number">2,500</td>
+                        <td>First purchase</td>
+                        <td class="number">3,086</td>
+                        <td class="number positive">+586</td>
+                    </tr>
+                    <tr>
+                        <td class="center">2</td>
+                        <td>2025-02-28 11:41:21</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.04822330</td>
+                        <td class="number">3,500</td>
+                        <td class="number">72,397.57</td>
+                        <td class="number">0.07066929</td>
+                        <td class="number">6,000</td>
+                        <td>Market dip</td>
+                        <td class="number">6,631</td>
+                        <td class="number positive">+3,131</td>
+                    </tr>
+                    <tr>
+                        <td class="center">3</td>
+                        <td>2025-02-28 12:25:29</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.01378455</td>
+                        <td class="number">1,000</td>
+                        <td class="number">72,363.60</td>
+                        <td class="number">0.08445384</td>
+                        <td class="number">7,000</td>
+                        <td>Same day add</td>
+                        <td class="number">1,895</td>
+                        <td class="number positive">+895</td>
+                    </tr>
+                    <tr>
+                        <td class="center">4</td>
+                        <td>2025-02-28 23:11:34</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.02641448</td>
+                        <td class="number">2,000</td>
+                        <td class="number">75,526.75</td>
+                        <td class="number">0.11086832</td>
+                        <td class="number">9,000</td>
+                        <td>Same day final</td>
+                        <td class="number">3,632</td>
+                        <td class="number positive">+1,632</td>
+                    </tr>
+                    <tr>
+                        <td class="center">5</td>
+                        <td>2025-03-30 12:28:19</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.01594073</td>
+                        <td class="number">1,000</td>
+                        <td class="number">62,732.36</td>
+                        <td class="number">0.12680905</td>
+                        <td class="number">10,000</td>
+                        <td>Great price</td>
+                        <td class="number">2,192</td>
+                        <td class="number positive">+1,192</td>
+                    </tr>
+                    <tr>
+                        <td class="center">6</td>
+                        <td>2025-04-02 17:04:26</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.03109792</td>
+                        <td class="number">2,000</td>
+                        <td class="number">64,152.18</td>
+                        <td class="number">0.15790697</td>
+                        <td class="number">12,000</td>
+                        <td>Accumulation</td>
+                        <td class="number">4,276</td>
+                        <td class="number positive">+2,276</td>
+                    </tr>
+                    <tr>
+                        <td class="center">7</td>
+                        <td>2025-05-02 13:36:44</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.03281784</td>
+                        <td class="number">2,000</td>
+                        <td class="number">60,942.46</td>
+                        <td class="number">0.19072481</td>
+                        <td class="number">14,000</td>
+                        <td><strong>Best price!</strong></td>
+                        <td class="number">4,512</td>
+                        <td class="number positive">+2,512</td>
+                    </tr>
+                    <tr>
+                        <td class="center">8</td>
+                        <td>2025-07-01 22:55:47</td>
+                        <td class="center">BUY</td>
+                        <td class="number">0.07600536</td>
+                        <td class="number">6,000</td>
+                        <td class="number">78,744.44</td>
+                        <td class="number">0.26673017</td>
+                        <td class="number">20,000</td>
+                        <td>Large purchase</td>
+                        <td class="number">10,451</td>
+                        <td class="number positive">+4,451</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background-color: #f8f9fa; font-weight: bold;">
+                        <td colspan="4"><strong>TOTALS</strong></td>
+                        <td class="number"><strong>20,000</strong></td>
+                        <td class="center">-</td>
+                        <td class="number"><strong>0.26673017</strong></td>
+                        <td class="number"><strong>20,045</strong></td>
+                        <td>+45 THB fees</td>
+                        <td class="number"><strong>36,675</strong></td>
+                        <td class="number positive"><strong>+16,630</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Sheet 3: P&L Tracking -->
+        <div class="sheet-content">
+            <h2>💰 Profit & Loss Tracking</h2>
+            
+            <div class="success-box">
+                <h3>🎯 Profit Taking Scenarios</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Target Price</th>
+                            <th>Action</th>
+                            <th>ETH to Sell</th>
+                            <th>Gross Cash</th>
+                            <th>Bitkub Fee</th>
+                            <th>Net Cash</th>
+                            <th>Remaining ETH</th>
+                            <th>Total Profit</th>
+                            <th>ROI %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="number">150,000 THB</td>
+                            <td class="center">Sell 20%</td>
+                            <td class="number">0.0533</td>
+                            <td class="number">7,995</td>
+                            <td class="number">75</td>
+                            <td class="number positive">7,920</td>
+                            <td class="number">0.2134</td>
+                            <td class="number positive">23,550</td>
+                            <td class="number positive">+99.6%</td>
+                        </tr>
+                        <tr>
+                            <td class="number">180,000 THB</td>
+                            <td class="center">Sell 30%</td>
+                            <td class="number">0.0800</td>
+                            <td class="number">14,400</td>
+                            <td class="number">75</td>
+                            <td class="number positive">14,325</td>
+                            <td class="number">0.1867</td>
+                            <td class="number positive">37,875</td>
+                            <td class="number positive">+139.4%</td>
+                        </tr>
+                        <tr>
+                            <td class="number">200,000 THB</td>
+                            <td class="center">Sell 25%</td>
+                            <td class="number">0.0667</td>
+                            <td class="number">13,340</td>
+                            <td class="number">75</td>
+                            <td class="number positive">13,265</td>
+                            <td class="number">0.1200</td>
+                            <td class="number positive">51,140</td>
+                            <td class="number positive">+180.2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="alert-box">
+                <h3>📉 Buy-Back Opportunities</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Target Price</th>
+                            <th>Available Cash</th>
+                            <th>ETH to Buy</th>
+                            <th>Trading Fee</th>
+                            <th>Net ETH</th>
+                            <th>New Total ETH</th>
+                            <th>Strategy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="number">125,000 THB</td>
+                            <td class="number">17,755</td>
+                            <td class="number">0.1420</td>
+                            <td class="number">35</td>
+                            <td class="number">0.1417</td>
+                            <td class="number positive">0.4084</td>
+                            <td>First major dip</td>
+                        </tr>
+                        <tr>
+                            <td class="number">120,000 THB</td>
+                            <td class="number">17,755</td>
+                            <td class="number">0.1480</td>
+                            <td class="number">35</td>
+                            <td class="number">0.1477</td>
+                            <td class="number positive">0.5561</td>
+                            <td>Major correction</td>
+                        </tr>
+                        <tr>
+                            <td class="number">100,000 THB</td>
+                            <td class="number">Reserve</td>
+                            <td class="number">0.1775</td>
+                            <td class="number">35</td>
+                            <td class="number">0.1772</td>
+                            <td class="number positive">0.7333</td>
+                            <td>Crash opportunity</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sheet 4: DCA Schedule -->
+        <div class="sheet-content">
+            <h2>📅 DCA Schedule (Oct 2025 - Apr 2026)</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>DCA Amount</th>
+                        <th>Assumed Price</th>
+                        <th>ETH Expected</th>
+                        <th>Cumulative ETH</th>
+                        <th>Cumulative Investment</th>
+                        <th>Status</th>
+                        <th>Actual Price</th>
+                        <th>Actual ETH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #e9ecef;">
+                        <td><strong>Current (Sep 2025)</strong></td>
+                        <td class="number">-</td>
+                        <td class="number">137,500</td>
+                        <td class="number">-</td>
+                        <td class="number">0.26673017</td>
+                        <td class="number">20,045</td>
+                        <td class="center">✅ Done</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Oct 2025</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.28983</td>
+                        <td class="number">23,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Nov 2025</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.31293</td>
+                        <td class="number">26,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 2025</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.33603</td>
+                        <td class="number">29,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Jan 2026</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.35913</td>
+                        <td class="number">32,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Feb 2026</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.38223</td>
+                        <td class="number">35,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Mar 2026</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.40533</td>
+                        <td class="number">38,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                    <tr>
+                        <td>Apr 2026</td>
+                        <td class="number">3,000</td>
+                        <td class="number">130,000</td>
+                        <td class="number">0.0231</td>
+                        <td class="number">0.42843</td>
+                        <td class="number">41,045</td>
+                        <td class="center">⏳ Pending</td>
+                        <td class="number">-</td>
+                        <td class="number">-</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background-color: #f8f9fa; font-weight: bold;">
+                        <td><strong>TOTAL</strong></td>
+                        <td class="number"><strong>21,000</strong></td>
+                        <td class="center">-</td>
+                        <td class="number"><strong>0.1617</strong></td>
+                        <td class="number"><strong>0.42843</strong></td>
+                        <td class="number"><strong>41,045</strong></td>
+                        <td colspan="3">60.6% ETH increase planned</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Sheet 5: Strategy Targets -->
+        <div class="sheet-content">
+            <h2>🎯 Strategy Targets & Alerts</h2>
+            
+            <div class="summary-box">
+                <h3>📊 Price Alert Settings</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Alert Type</th>
+                            <th>Price Level</th>
+                            <th>Action Required</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🟢 Profit Taking</td>
+                            <td class="number">150,000 THB</td>
+                            <td>Sell 20% (0.0533 ETH)</td>
+                            <td class="center">🔥 High</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Keep THB in Bitkub</td>
+                        </tr>
+                        <tr>
+                            <td>🟢 Profit Taking</td>
+                            <td class="number">180,000 THB</td>
+                            <td>Sell 30% (0.0800 ETH)</td>
+                            <td class="center">🔥 High</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Keep THB in Bitkub</td>
+                        </tr>
+                        <tr>
+                            <td>🟢 Profit Taking</td>
+                            <td class="number">200,000 THB</td>
+                            <td>Sell 25% (0.0667 ETH)</td>
+                            <td class="center">🔥 High</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Major milestone</td>
+                        </tr>
+                        <tr>
+                            <td>🔴 Buy Back</td>
+                            <td class="number">125,000 THB</td>
+                            <td>Deploy 50% cash</td>
+                            <td class="center">⚡ Medium</td>
+                            <td class="center">⏳ Set</td>
+                            <td>First entry point</td>
+                        </tr>
+                        <tr>
+                            <td>🔴 Buy Back</td>
+                            <td class="number">120,000 THB</td>
+                            <td>Deploy remaining cash</td>
+                            <td class="center">⚡ Medium</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Major dip opportunity</td>
+                        </tr>
+                        <tr>
+                            <td>🔴 Buy Back</td>
+                            <td class="number">100,000 THB</td>
+                            <td>Emergency cash deployment</td>
+                            <td class="center">🚨 Critical</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Crash scenario</td>
+                        </tr>
+                        <tr>
+                            <td>⚠️ Stop Loss</td>
+                            <td class="number">70,000 THB</td>
+                            <td>Review strategy</td>
+                            <td class="center">🚨 Critical</td>
+                            <td class="center">⏳ Set</td>
+                            <td>Below cost basis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="alert-box">
+                <h3>📋 Monthly Checklist</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Frequency</th>
+                            <th>Last Done</th>
+                            <th>Next Due</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Execute DCA Purchase</td>
+                            <td>Monthly (1st)</td>
+                            <td>2025-07-01</td>
+                            <td>2025-10-01</td>
+                            <td class="center">⏰ Due</td>
+                        </tr>
+                        <tr>
+                            <td>Update Portfolio Value</td>
+                            <td>Weekly</td>
+                            <td>2025-09-07</td>
+                            <td>2025-09-14</td>
+                            <td class="center">✅ Current</td>
+                        </tr>
+                        <tr>
+                            <td>Review Price Alerts</td>
+                            <td>Monthly</td>
+                            <td>2025-09-07</td>
+                            <td>2025-10-07</td>
+                            <td class="center">✅ Current</td>
+                        </tr>
+                        <tr>
+                            <td>Backup Transaction Data</td>
+                            <td>Monthly</td>
+                            <td>2025-08-01</td>
+                            <td>2025-09-01</td>
+                            <td class="center">⏰ Overdue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Sheet 6: Performance Metrics -->
+        <div class="sheet-content">
+            <h2>📈 Performance Metrics & Analysis</h2>
+            
+            <div class="summary-box">
+                <h3>🎯 Key Performance Indicators</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Current Value</th>
+                            <th>Benchmark</th>
+                            <th>Performance</th>
+                            <th>Grade</th>
+                            <th>Excel Formula</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Return</strong></td>
+                            <td class="number positive">+82.9%</td>
+                            <td class="number">+50%</td>
+                            <td class="center positive">Above Target</td>
+                            <td class="center positive">A+</td>
+                            <td class="formula">=(Portfolio_Value/Total_Investment-1)*100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Annualized Return</strong></td>
+                            <td class="number positive">~148%</td>
+                            <td class="number">+100%</td>
+                            <td class="center positive">Excellent</td>
+                            <td class="center positive">A+</td>
+                            <td class="formula">=((Portfolio_Value/Total_Investment)^(365/Days)-1)*100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk-Adjusted Return</strong></td>
+                            <td class="number positive">High</td>
+                            <td class="number">Medium</td>
+                            <td class="center positive">Strong</td>
+                            <td class="center positive">A</td>
+                            <td class="formula">=Total_Return/Price_Volatility</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Average Purchase Price</strong></td>
+                            <td class="number">75,179 THB</td>
+                            <td class="number">Current Price</td>
+                            <td class="center positive">45% below current</td>
+                            <td class="center positive">A+</td>
+                            <td class="formula">=Total_Investment/Total_ETH</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Portfolio Diversification</strong></td>
+                            <td class="number">Single Asset</td>
+                            <td class="number">Multiple Assets</td>
+                            <td class="center">Concentrated</td>
+                            <td class="center">C</td>
+                            <td class="formula">Manual Assessment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investment Discipline</strong></td>
+                            <td class="number positive">Excellent</td>
+                            <td class="number">Good</td>
+                            <td class="center positive">Strong DCA & Dip Buying</td>
+                            <td class="center positive">A+</td>
+                            <td class="formula">Manual Assessment</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="success-box">
+                <h3>📊 Purchase Analysis by Month</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Purchases</th>
+                            <th>ETH Bought</th>
+                            <th>THB Invested</th>
+                            <th>Avg Price</th>
+                            <th>Current Value</th>
+                            <th>P&L</th>
+                            <th>ROI %</th>
+                            <th>Performance Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jan 2025</td>
+                            <td class="center">1</td>
+                            <td class="number">0.0224</td>
+                            <td class="number">2,500</td>
+                            <td class="number">111,100</td>
+                            <td class="number">3,086</td>
+                            <td class="number positive">+586</td>
+                            <td class="number positive">+23.4%</td>
+                            <td class="center">⭐⭐⭐</td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>Feb 2025</strong></td>
+                            <td class="center"><strong>3</strong></td>
+                            <td class="number"><strong>0.0884</strong></td>
+                            <td class="number"><strong>6,500</strong></td>
+                            <td class="number"><strong>73,528</strong></td>
+                            <td class="number"><strong>12,158</strong></td>
+                            <td class="number positive"><strong>+5,658</strong></td>
+                            <td class="number positive"><strong>+87.0%</strong></td>
+                            <td class="center"><strong>⭐⭐⭐⭐⭐</strong></td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>Mar 2025</strong></td>
+                            <td class="center"><strong>1</strong></td>
+                            <td class="number"><strong>0.0159</strong></td>
+                            <td class="number"><strong>1,000</strong></td>
+                            <td class="number"><strong>62,732</strong></td>
+                            <td class="number"><strong>2,192</strong></td>
+                            <td class="number positive"><strong>+1,192</strong></td>
+                            <td class="number positive"><strong>+119.2%</strong></td>
+                            <td class="center"><strong>⭐⭐⭐⭐⭐</strong></td>
+                        </tr>
+                        <tr style="background-color: #d4edda;">
+                            <td><strong>Apr 2025</strong></td>
+                            <td class="center"><strong>1</strong></td>
+                            <td class="number"><strong>0.0311</strong></td>
+                            <td class="number"><strong>2,000</strong></td>
+                            <td class="number"><strong>64,152</strong></td>
+                            <td class="number"><strong>4,276</strong></td>
+                            <td class="number positive"><strong>+2,276</strong></td>
+                            <td class="number positive"><strong>+113.8%</strong></td>
+                            <td class="center"><strong>⭐⭐⭐⭐⭐</strong></td>
+                        </tr>
+                        <tr style="background-color: #c8e6c9;">
+                            <td><strong>May 2025 🏆</strong></td>
+                            <td class="center"><strong>1</strong></td>
+                            <td class="number"><strong>0.0328</strong></td>
+                            <td class="number"><strong>2,000</strong></td>
+                            <td class="number"><strong>60,942</strong></td>
+                            <td class="number"><strong>4,512</strong></td>
+                            <td class="number positive"><strong>+2,512</strong></td>
+                            <td class="number positive"><strong>+125.6%</strong></td>
+                            <td class="center"><strong>⭐⭐⭐⭐⭐</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Jul 2025</td>
+                            <td class="center">1</td>
+                            <td class="number">0.0760</td>
+                            <td class="number">6,000</td>
+                            <td class="number">78,744</td>
+                            <td class="number">10,451</td>
+                            <td class="number positive">+4,451</td>
+                            <td class="number positive">+74.2%</td>
+                            <td class="center">⭐⭐⭐⭐</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="alert-box">
+                <h3>🎯 Strategy Effectiveness Analysis</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Strategy Element</th>
+                            <th>Implementation</th>
+                            <th>Effectiveness</th>
+                            <th>Impact on Returns</th>
+                            <th>Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>DCA (Dollar Cost Averaging)</strong></td>
+                            <td class="center positive">✅ Executed</td>
+                            <td class="center positive">High</td>
+                            <td class="center positive">Reduced avg cost</td>
+                            <td>Continue monthly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dip Buying</strong></td>
+                            <td class="center positive">✅ Excellent</td>
+                            <td class="center positive">Very High</td>
+                            <td class="center positive">+87-125% on Feb-May</td>
+                            <td>Maintain discipline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Position Sizing</strong></td>
+                            <td class="center positive">✅ Good</td>
+                            <td class="center positive">High</td>
+                            <td class="center positive">Larger buys at lows</td>
+                            <td>Continue strategy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Profit Taking Plan</strong></td>
+                            <td class="center">⏳ Pending</td>
+                            <td class="center">TBD</td>
+                            <td class="center">Not yet tested</td>
+                            <td>Execute at targets</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Risk Management</strong></td>
+                            <td class="center positive">✅ Strong</td>
+                            <td class="center positive">High</td>
+                            <td class="center positive">No panic selling</td>
+                            <td>Maintain discipline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tax Optimization</strong></td>
+                            <td class="center positive">✅ Optimal</td>
+                            <td class="center positive">Perfect</td>
+                            <td class="center positive">0% tax liability</td>
+                            <td>Continue strategy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="summary-box">
+                <h3>🏆 Investment Scorecard</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Weight</th>
+                            <th>Score (1-10)</th>
+                            <th>Weighted Score</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Entry Timing</td>
+                            <td class="center">25%</td>
+                            <td class="center positive">9</td>
+                            <td class="center positive">2.25</td>
+                            <td>Excellent Feb-May accumulation</td>
+                        </tr>
+                        <tr>
+                            <td>Risk Management</td>
+                            <td class="center">20%</td>
+                            <td class="center positive">9</td>
+                            <td class="center positive">1.80</td>
+                            <td>Strong discipline, no panic selling</td>
+                        </tr>
+                        <tr>
+                            <td>Strategy Execution</td>
+                            <td class="center">20%</td>
+                            <td class="center positive">8</td>
+                            <td class="center positive">1.60</td>
+                            <td>Good DCA + dip buying combo</td>
+                        </tr>
+                        <tr>
+                            <td>Portfolio Management</td>
+                            <td class="center">15%</td>
+                            <td class="center">7</td>
+                            <td class="center">1.05</td>
+                            <td>Single asset concentration risk</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Efficiency</td>
+                            <td class="center">10%</td>
+                            <td class="center positive">10</td>
+                            <td class="center positive">1.00</td>
+                            <td>Minimal fees, tax-free gains</td>
+                        </tr>
+                        <tr>
+                            <td>Record Keeping</td>
+                            <td class="center">10%</td>
+                            <td class="center positive">9</td>
+                            <td class="center positive">0.90</td>
+                            <td>Excellent transaction tracking</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="background-color: #f8f9fa; font-weight: bold;">
+                            <td><strong>OVERALL SCORE</strong></td>
+                            <td class="center"><strong>100%</strong></td>
+                            <td class="center">-</td>
+                            <td class="center positive"><strong>8.6/10</strong></td>
+                            <td><strong>Grade: A- (Excellent Performance)</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSheet(index) {
+            // Hide all sheet contents
+            const contents = document.querySelectorAll('.sheet-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.sheet-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected sheet and activate tab
+            contents[index].classList.add('active');
+            tabs[index].classList.add('active');
+        }
+        
+        // Auto-calculate current portfolio value when ETH price is updated
+        function updatePortfolioValue() {
+            const currentPrice = prompt("Enter current ETH price (THB):");
+            if (currentPrice && !isNaN(currentPrice)) {
+                const ethHoldings = 0.26673017;
+                const totalInvestment = 20045;
+                const portfolioValue = (ethHoldings * parseFloat(currentPrice)).toFixed(0);
+                const unrealizedPL = (portfolioValue - totalInvestment).toFixed(0);
+                const returnPercent = ((portfolioValue / totalInvestment - 1) * 100).toFixed(1);
+                
+                alert(`Portfolio Update:
+ETH Price: ${parseFloat(currentPrice).toLocaleString()} THB
+Portfolio Value: ${parseFloat(portfolioValue).toLocaleString()} THB
+Unrealized P&L: ${unrealizedPL >= 0 ? '+' : ''}${parseFloat(unrealizedPL).toLocaleString()} THB
+Return: ${returnPercent >= 0 ? '+' : ''}${returnPercent}%`);
+            }
+        }
+        
+        // Add update button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const updateBtn = document.createElement('button');
+            updateBtn.textContent = '🔄 Update Portfolio Value';
+            updateBtn.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 15px;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                z-index: 1000;
+            `;
+            updateBtn.onclick = updatePortfolioValue;
+            document.body.appendChild(updateBtn);
+        });
+    </script>
+</body>
+</html>
